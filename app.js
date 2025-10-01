@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import userRoutes from "./routes/userRoutes.js";
 import errorHandler from "./middlewares/errorMiddleware.js";
+import popularDestinationRoutes from "./routes/popularDestinationRoutes.js";
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.get("/", (req, res) => {
   res.json({ status: "Server is running 🚀" });
 });
 app.use("/api/users", userRoutes);
+app.use("/api/popular-destinations", popularDestinationRoutes);
 
 // Error Middleware
 app.use(errorHandler);
