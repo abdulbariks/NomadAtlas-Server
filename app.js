@@ -5,6 +5,7 @@ import userRoutes from "./routes/userRoutes.js";
 import errorHandler from "./middlewares/errorMiddleware.js";
 import popularDestinationRoutes from "./routes/popularDestinationRoutes.js";
 import costCalculatorRoutes from "./routes/costCalculatorRoute.js";
+import resourceRoute from "./routes/resourceRoute.js";
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ app.use("/api/popular-destinations", popularDestinationRoutes);
 
 // use cost-calculator
 app.use("/cost-calculator", costCalculatorRoutes);
+app.use("/resources", resourceRoute);
 
 // Error Middleware
 app.use(errorHandler);
