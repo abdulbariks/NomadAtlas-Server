@@ -6,6 +6,7 @@ import errorHandler from "./middlewares/errorMiddleware.js";
 import popularDestinationRoutes from "./routes/popularDestinationRoutes.js";
 import destinationRoutes from "./routes/destinationRoutes.js";
 import reviewRoutes from "./routes/reviewRoutes.js";
+import bookingRoutes from './routes/bookingRoutes.js';
 
 dotenv.config();
 
@@ -26,6 +27,8 @@ app.use("/api/users", userRoutes);
 app.use("/api/popular-destinations", popularDestinationRoutes);
 app.use("/api/destinations", destinationRoutes);
 app.use("/api/reviews", reviewRoutes);
+app.use('/api/bookings', bookingRoutes)
+
 
 // Error Middleware
 app.use(errorHandler);
