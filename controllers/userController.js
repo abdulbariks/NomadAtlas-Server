@@ -14,7 +14,7 @@ export const registerUser = async (req, res, next) => {
   }
 };
 
-// ✅ Get all users
+// Get all users
 export const getUsers = async (req, res, next) => {
   try {
     const users = await User.find();
