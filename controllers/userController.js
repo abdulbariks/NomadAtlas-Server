@@ -14,6 +14,23 @@ export const registerUser = async (req, res, next) => {
   }
 };
 
+export const loginUser = async (req, res, next) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    user.last_log_in = new Date();
+    await user.save()
+    return res.status(200).json(user);
+  } catch (error) {
+    next(error)
+  }
+}
+
 // ✅ Get all users
 export const getUsers = async (req, res, next) => {
   try {
