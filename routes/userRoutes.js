@@ -7,6 +7,6 @@ const router = express.Router();
 
 router.post("/", registerUser);
 router.get("/", verifyFirebaseToken, verifyAdmin, getUsers);
-router.get("/role/:email", checkUserRole)
+router.get("/role/:email",verifyFirebaseToken, checkUserRole)
 
 export default router;

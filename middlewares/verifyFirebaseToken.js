@@ -3,9 +3,6 @@ import admin from "firebase-admin";
 
 // import serviceAccount from "../firebase-admin-key.json"
 
-// admin.initializeApp({
-//     credential: admin.credential.cert(serviceAccount),
-// });
 
 import fs from "fs";
 
@@ -13,6 +10,9 @@ const serviceAccount = JSON.parse(
     fs.readFileSync(new URL("../firebase-admin-key.json", import.meta.url))
 );
 
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+});
 
 const verifyFirebaseToken = async (req, res, next) => {
     const authHeader = req.headers.authorization;
