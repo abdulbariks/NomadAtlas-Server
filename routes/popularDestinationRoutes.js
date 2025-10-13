@@ -14,5 +14,5 @@ router.get("/:id", getPopularDestinationById);
 router.post("/", createPopularDestination);
 router.put("/:id", updatePopularDestination);
 router.delete("/:id", deletePopularDestination);
-
+ 
 export default router;
