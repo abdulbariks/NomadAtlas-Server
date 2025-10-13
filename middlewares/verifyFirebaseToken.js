@@ -1,21 +1,31 @@
 import admin from "firebase-admin";
+import dotenv from "dotenv";
+dotenv.config();
+// import fs from "fs";
+
+// const serviceAccount = JSON.parse(
+//     fs.readFileSync(new URL("../firebase-admin-key.json", import.meta.url))
+// );
 
 
-// import serviceAccount from "../firebase-admin-key.json"
+// admin.initializeApp({
+//     credential: admin.credential.cert(serviceAccount),
+// });
 
 
-import fs from "fs";
 
-const serviceAccount = JSON.parse(
-    fs.readFileSync(new URL("../firebase-admin-key.json", import.meta.url))
-);
+const decodedKey = Buffer.from(process.env.FB_SERVICE_KEY, 'base64').toString('utf8');
+const serviceAccount = JSON.parse(decodedKey);
+if (!admin.apps.length) {
+    admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount),
 
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-});
+    });
+}
 
 const verifyFirebaseToken = async (req, res, next) => {
     const authHeader = req.headers.authorization;
+    // console.log("sjkdfhbgjs",authHeader)
     if (!authHeader) {
         return res.status(401).send({ message: 'unauthorized access' })
     }
