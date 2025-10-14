@@ -7,6 +7,8 @@ import popularDestinationRoutes from "./routes/popularDestinationRoutes.js";
 import destinationRoutes from "./routes/destinationRoutes.js";
 import reviewRoutes from "./routes/reviewRoutes.js";
 import bookingRoutes from './routes/bookingRoutes.js';
+import paymentRoutes from "./routes/paymentRoutes.js";
+
 
 dotenv.config();
 
@@ -28,6 +30,7 @@ app.use("/api/popular-destinations", popularDestinationRoutes);
 app.use("/api/destinations", destinationRoutes);
 app.use("/api/reviews", reviewRoutes);
 app.use('/api/bookings', bookingRoutes)
+app.use("/api/payments", paymentRoutes);
 
 
 // Error Middleware
