@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-let isConnected = false; // global flag
+let isConnected = false;
 
 const connectDB = async () => {
   if (isConnected) {
