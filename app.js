@@ -10,6 +10,7 @@ import destinationRoutes from "./routes/destinationRoutes.js";
 import reviewRoutes from "./routes/reviewRoutes.js";
 import costCalculatorRoutes from "./routes/costCalculatorRoute.js";
 import resourceRoute from "./routes/resourceRoute.js";
+import blogsRoutes from "./routes/blogsRoutes.js";
 
 connectDB();
 
@@ -30,6 +31,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/popular-destinations", popularDestinationRoutes);
 app.use("/api/destinations", destinationRoutes);
 app.use("/api/reviews", reviewRoutes);
+app.use("/api/blogs",blogsRoutes );
 
 // use cost-calculator
 app.use("/cost-calculator", costCalculatorRoutes);
