@@ -2,3 +2,5 @@ node_modules
 dist
 .env
 .vercel
+firebase-admin-key.json
+convert-key.js
