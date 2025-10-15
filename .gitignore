@@ -2,5 +2,6 @@ node_modules
 dist
 .env
 .vercel
-seedBlogs.js
 firebase-admin-key.json
+convert-key.js
+seedBlogs.js
