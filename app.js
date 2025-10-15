@@ -8,12 +8,12 @@ import errorHandler from "./middlewares/errorMiddleware.js";
 import popularDestinationRoutes from "./routes/popularDestinationRoutes.js";
 import destinationRoutes from "./routes/destinationRoutes.js";
 import reviewRoutes from "./routes/reviewRoutes.js";
-import bookingRoutes from './routes/bookingRoutes.js';
-import paymentRoutes from "./routes/paymentRoutes.js";
-
 import costCalculatorRoutes from "./routes/costCalculatorRoute.js";
 import resourceRoute from "./routes/resourceRoute.js";
 import blogsRoutes from "./routes/blogsRoutes.js";
+import bookingRoutes from './routes/bookingRoutes.js';
+import paymentRoutes from "./routes/paymentRoutes.js";
+
 import internetSpeedRoutes from "./routes/internetSpeedRoutes.js";
 
 connectDB();

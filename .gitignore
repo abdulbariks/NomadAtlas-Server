@@ -4,4 +4,3 @@ dist
 .vercel
 firebase-admin-key.json
 convert-key.js
-seedBlogs.js
