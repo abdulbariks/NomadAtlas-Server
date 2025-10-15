@@ -4,7 +4,7 @@ import Destination from "../models/destinationModel.js";
 export const createDestination = async (req, res) => {
   try {
     const destinationData = req.body;
-
+ 
     if (!destinationData.name || !destinationData.country) {
       return res.status(400).json({ message: "Name and Country are required" });
     }
