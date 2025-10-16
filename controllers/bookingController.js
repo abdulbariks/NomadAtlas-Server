@@ -150,3 +150,57 @@ export const cancelBooking = async (req, res) => {
   }
 };
 
+
+
+
+// ✅ @desc Get bookings by provider email (Admin/provider dashboard view)
+// @route GET /api/bookings/provider/:email
+// @access Protected (Admin/Provider)
+export const getBookingsByProviderEmail = async (req, res) => {
+  try {
+    const { email } = req.params;
+    if (!email) {
+      return res.status(400).json({ success: false, message: "Provider email is required" });
+    }
+
+    // Find all bookings created by this provider
+    const bookings = await Booking.find({ providerEmail: email }).sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      count: bookings.length,
+      data: bookings,
+    });
+  } catch (error) {
+    console.error("Error fetching provider bookings:", error);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};
+
+// ✅ @desc Delete a booking by ID
+// @route DELETE /api/bookings/:id
+// @access Protected (Admin/Provider)
+export const deleteBooking = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ success: false, message: "Invalid booking ID" });
+    }
+
+    const booking = await Booking.findById(id);
+    if (!booking) {
+      return res.status(404).json({ success: false, message: "Booking not found" });
+    }
+
+    await booking.deleteOne();
+
+    res.status(200).json({
+      success: true,
+      message: "Booking deleted successfully",
+    });
+  } catch (error) {
+    console.error("Delete Booking Error:", error);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};
