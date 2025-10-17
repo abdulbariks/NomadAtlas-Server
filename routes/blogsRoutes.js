@@ -6,8 +6,8 @@ import {
   updateBlog,
   deleteBlog,
   likeBlog,
-  addComment,
-  deleteComment,
+ 
+  
 } from "../controllers/blogs.js";
 
 const router = express.Router();
@@ -21,7 +21,6 @@ router.delete("/:id", deleteBlog);
 
 // Like and Comment routes
 router.post("/:id/like", likeBlog);
-router.post("/:id/comment", addComment);
-router.delete("/:id/comment/:commentId", deleteComment);
+
 
 export default router;

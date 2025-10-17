@@ -1,15 +1,5 @@
 import mongoose from "mongoose";
 
-//  Sub-schema for comments
-const commentSchema = new mongoose.Schema(
-  {
-    name: { type: String, required: true }, // commenter’s name
-    text: { type: String, required: true }, // comment text
-    avatar: { type: String, default: "https://i.pravatar.cc/40" }, // small user image
-    time: { type: Date, default: Date.now }, // comment timestamp
-  },
-  { _id: false } // no separate _id for subdocs (optional)
-);
 
 // Main blog schema
 const blogSchema = new mongoose.Schema(
@@ -31,7 +21,7 @@ const blogSchema = new mongoose.Schema(
 
     //  Likes & Comments
     likes: { type: Number, default: 0 },
-    comments: [commentSchema],
+  
   },
   { timestamps: true } // includes createdAt & updatedAt
 );
