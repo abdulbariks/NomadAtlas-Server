@@ -1,17 +1,12 @@
-// controllers/blogController.js
 import Blog from "../models/blogs.js";
 
-// @desc Get all blogs with pagination, search, and category filter
+// 🟢 Get all blogs (with search, filter, pagination)
 export const getBlogs = async (req, res) => {
   try {
     const { category, search, page = 1, limit = 6 } = req.query;
-
     const query = {};
 
-    // Category filter
     if (category) query.category = category;
-
-    // Search by title, content, or authorName
     if (search) {
       query.$or = [
         { title: { $regex: search, $options: "i" } },
@@ -39,7 +34,7 @@ export const getBlogs = async (req, res) => {
   }
 };
 
-// @desc Get single blog
+// 🟢 Get single blog
 export const getBlogById = async (req, res) => {
   try {
     const blog = await Blog.findById(req.params.id);
@@ -50,7 +45,7 @@ export const getBlogById = async (req, res) => {
   }
 };
 
-// @desc Create new blog (with authorImage)
+// 🟢 Create new blog
 export const createBlog = async (req, res) => {
   try {
     const {
@@ -61,7 +56,7 @@ export const createBlog = async (req, res) => {
       image,
       authorName,
       authorEmail,
-      authorImage, // <-- added
+      authorImage,
       type,
     } = req.body;
 
@@ -73,7 +68,7 @@ export const createBlog = async (req, res) => {
       image,
       authorName,
       authorEmail,
-      authorImage, // <-- added
+      authorImage,
       type,
     });
 
@@ -84,7 +79,7 @@ export const createBlog = async (req, res) => {
   }
 };
 
-// @desc Update blog
+// 🟢 Update blog
 export const updateBlog = async (req, res) => {
   try {
     const updatedBlog = await Blog.findByIdAndUpdate(req.params.id, req.body, {
@@ -96,7 +91,7 @@ export const updateBlog = async (req, res) => {
   }
 };
 
-// @desc Delete blog
+// 🟢 Delete blog
 export const deleteBlog = async (req, res) => {
   try {
     await Blog.findByIdAndDelete(req.params.id);
@@ -105,3 +100,23 @@ export const deleteBlog = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// ❤️ Like a blog post
+export const likeBlog = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const blog = await Blog.findById(id);
+    if (!blog) return res.status(404).json({ message: "Blog not found" });
+
+    blog.likes = (blog.likes || 0) + 1;
+    await blog.save();
+
+    res.status(200).json({
+      likes: blog.likes,
+      message: "Blog liked successfully",
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
