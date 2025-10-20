@@ -15,7 +15,7 @@ import bookingRoutes from './routes/bookingRoutes.js';
 import paymentRoutes from "./routes/paymentRoutes.js";
 
 import internetSpeedRoutes from "./routes/internetSpeedRoutes.js";
-
+import commentRoutes from "./routes/blogComment.js";
 connectDB();
 
 const app = express();
@@ -46,6 +46,7 @@ app.use("/api/payments", paymentRoutes);
 app.use("/cost-calculator", costCalculatorRoutes);
 app.use("/resources", resourceRoute);
 app.use("/api/blogs", blogsRoutes);
+app.use("/api/comments", commentRoutes);
 app.use("/api/internet-speed", internetSpeedRoutes);
 
 // Error Middleware
