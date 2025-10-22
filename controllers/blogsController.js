@@ -1,6 +1,6 @@
-import Blog from "../models/blogs.js";
+import Blog from "../models/blogsModel.js";
 
-// 🟢 Get all blogs (with search, filter, pagination)
+// Get all blogs (with search, filter, pagination)
 export const getBlogs = async (req, res) => {
   try {
     const { category, search, page = 1, limit = 6 } = req.query;
@@ -34,7 +34,7 @@ export const getBlogs = async (req, res) => {
   }
 };
 
-// 🟢 Get single blog
+// Get single blog
 export const getBlogById = async (req, res) => {
   try {
     const blog = await Blog.findById(req.params.id);
@@ -45,7 +45,7 @@ export const getBlogById = async (req, res) => {
   }
 };
 
-// 🟢 Create new blog
+// Create new blog
 export const createBlog = async (req, res) => {
   try {
     const {
@@ -79,7 +79,7 @@ export const createBlog = async (req, res) => {
   }
 };
 
-// 🟢 Update blog
+// Update blog
 export const updateBlog = async (req, res) => {
   try {
     const updatedBlog = await Blog.findByIdAndUpdate(req.params.id, req.body, {
@@ -91,7 +91,7 @@ export const updateBlog = async (req, res) => {
   }
 };
 
-// 🟢 Delete blog
+// Delete blog
 export const deleteBlog = async (req, res) => {
   try {
     await Blog.findByIdAndDelete(req.params.id);
@@ -101,7 +101,7 @@ export const deleteBlog = async (req, res) => {
   }
 };
 
-// ❤️ Like a blog post
+// Like a blog post
 export const likeBlog = async (req, res) => {
   try {
     const { id } = req.params;

@@ -16,7 +16,7 @@ import blogRoutes from "./routes/blogsRoutes.js";
 import bookingRoutes from "./routes/bookingRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 import internetSpeedRoutes from "./routes/internetSpeedRoutes.js";
-import commentRoutes from "./routes/blogComment.js";
+import commentRoutes from "./routes/blogCommentRoute.js";
 
 import errorHandler from "./middlewares/errorMiddleware.js";
 
