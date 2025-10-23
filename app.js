@@ -16,6 +16,7 @@ import paymentRoutes from "./routes/paymentRoutes.js";
 
 import internetSpeedRoutes from "./routes/internetSpeedRoutes.js";
 import commentRoutes from "./routes/blogComment.js";
+import communityRoutes from "./routes/communityRoutes.js";
 connectDB();
 
 const app = express();
@@ -40,6 +41,7 @@ app.use("/api/destinations", destinationRoutes);
 app.use("/api/reviews", reviewRoutes);
 app.use('/api/bookings', bookingRoutes)
 app.use("/api/payments", paymentRoutes);
+app.use("/api/community", communityRoutes);
 
 
 // use cost-calculator
@@ -48,6 +50,7 @@ app.use("/resources", resourceRoute);
 app.use("/api/blogs", blogsRoutes);
 app.use("/api/comments", commentRoutes);
 app.use("/api/internet-speed", internetSpeedRoutes);
+
 
 // Error Middleware
 app.use(errorHandler);
