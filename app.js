@@ -15,14 +15,17 @@ import resourceRoute from "./routes/resourceRoute.js";
 import blogsRoutes from "./routes/blogsRoutes.js";
 import internetSpeedRoutes from "./routes/internetSpeedRoutes.js";
 import commentRoutes from "./routes/blogComment.js";
+import jobRoutes from "./routes/jobRoutes.js"
+
 connectDB();
+
 
 const app = express();
 app.use(cors());
 app.use(express.json()); // Body parser
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:5173","http://localhost:5174/"],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
@@ -39,6 +42,7 @@ app.use("/api/destinations", destinationRoutes);
 app.use("/api/reviews", reviewRoutes);
 app.use('/api/bookings', bookingRoutes)
 app.use("/api/payments", paymentRoutes);
+app.use("/api/jobs",jobRoutes)
 
 
 // use cost-calculator
