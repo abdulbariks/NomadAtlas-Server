@@ -45,8 +45,8 @@ app.use("/api/community", communityRoutes);
 
 
 // use cost-calculator
-app.use("/cost-calculator", costCalculatorRoutes);
-app.use("/resources", resourceRoute);
+app.use("/api/cost-calculator", costCalculatorRoutes);
+app.use("/api/resources", resourceRoute);
 app.use("/api/blogs", blogsRoutes);
 app.use("/api/comments", commentRoutes);
 app.use("/api/internet-speed", internetSpeedRoutes);
