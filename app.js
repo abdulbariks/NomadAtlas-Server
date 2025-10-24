@@ -34,7 +34,11 @@ const app = express();
 // ✅ Middlewares
 app.use(
   cors({
-    origin: ["http://localhost:5173","http://localhost:5174/"],
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:5174",
+      "https://nomad-atlast.netlify.app"
+    ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   })
@@ -62,7 +66,7 @@ app.use("/api/internet-speed", internetSpeedRoutes);
 
 // ✅ Global error handler
 app.use("/api/community", communityRoutes);
-app.use("/api/jobs",jobRoutes)
+app.use("/api/jobs", jobRoutes)
 
 
 // use cost-calculator
