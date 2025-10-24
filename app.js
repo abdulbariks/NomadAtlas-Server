@@ -24,12 +24,17 @@ import communityRoutes from "./routes/communityRoutes.js";
 connectDB();
 
 // ✅ Initialize Express
+import jobRoutes from "./routes/jobRoutes.js"
+
+connectDB();
+
+
 const app = express();
 
 // ✅ Middlewares
 app.use(
   cors({
-    origin: ["http://localhost:5173"], // your frontend URL
+    origin: ["http://localhost:5173","http://localhost:5174/"],
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   })
@@ -57,6 +62,7 @@ app.use("/api/internet-speed", internetSpeedRoutes);
 
 // ✅ Global error handler
 app.use("/api/community", communityRoutes);
+app.use("/api/jobs",jobRoutes)
 
 
 // use cost-calculator
