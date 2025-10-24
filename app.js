@@ -11,16 +11,16 @@ import popularDestinationRoutes from "./routes/popularDestinationRoutes.js";
 import destinationRoutes from "./routes/destinationRoutes.js";
 import reviewRoutes from "./routes/reviewRoutes.js";
 import costCalculatorRoutes from "./routes/costCalculatorRoute.js";
-import resourceRoutes from "./routes/resourceRoute.js";
 import blogRoutes from "./routes/blogsRoutes.js";
 import bookingRoutes from "./routes/bookingRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 import internetSpeedRoutes from "./routes/internetSpeedRoutes.js";
 import commentRoutes from "./routes/blogCommentRoute.js";
-
+import resourceRoute from "./routes/resourceRoute.js"
 import errorHandler from "./middlewares/errorMiddleware.js";
 
 // ✅ Connect to MongoDB
+import communityRoutes from "./routes/communityRoutes.js";
 connectDB();
 
 // ✅ Initialize Express
@@ -53,11 +53,18 @@ app.use("/api/blogs", blogRoutes);
 app.use("/api/comments", commentRoutes);
 app.use("/api/internet-speed", internetSpeedRoutes);
 
-// Other utilities
-app.use("/cost-calculator", costCalculatorRoutes);
-app.use("/resources", resourceRoutes);
+
 
 // ✅ Global error handler
+app.use("/api/community", communityRoutes);
+
+
+// use cost-calculator
+app.use("/api/cost-calculator", costCalculatorRoutes);
+app.use("/api/resources", resourceRoute);
+
+
+// Error Middleware
 app.use(errorHandler);
 
 export default app;
