@@ -12,7 +12,7 @@ const server = http.createServer(app);
 //setup socket io
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "https://nomad-atlast.netlify.app"],
     methods: ["GET", "POST"]
   }
 });
@@ -41,7 +41,6 @@ io.on("connection", (socket) => {
 });
 
 
-// Connect DB first, then start server
 connectDB()
   .then(() => {
     server.listen(PORT, () => {
@@ -52,29 +51,6 @@ connectDB()
     console.error("Failed to connect to MongoDB:", err.message);
     process.exit(1);
   });
+
 export default app;
-
-
-
-
-// io.on("connection", (socket) => {
-//   console.log("New client connected:", socket.id);
-
-//   socket.on("send_message", async (data) => {
-//     try {
-//       const savedMsg = await Message.create({
-//         sender: data.sender,
-//         role: data.role,
-//         text: data.text,
-//       });
-
-//       io.emit("receive_message", savedMsg);
-//     } catch (error) {
-//       console.error("Error saving message:", error);
-//     }
-//   });
-
-//   socket.on("disconnect", () => {
-//     console.log("Client disconnected:", socket.id);
-//   });
-// });
+ 

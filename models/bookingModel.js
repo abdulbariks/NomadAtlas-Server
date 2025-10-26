@@ -2,24 +2,24 @@ import mongoose from "mongoose";
 
 const bookingSchema = new mongoose.Schema(
   {
-    // 👤 User Info
+    // User Info
     userName: { type: String, required: true, trim: true },
     userEmail: { type: String, required: true, trim: true, lowercase: true },
     userPhone: { type: String, required: true, trim: true },
 
-    // 📅 Booking Details
+    // Booking Details
     bookedDate: { type: String, required: true },
     bookedTime: { type: Date, default: Date.now },
 
-    // 💳 Payment Info
+    // Payment Info
     paymentStatus: {
       type: String,
       enum: ["unpaid", "paid", "refunded", "cancelled"],
       default: "unpaid",
     },
-    paidAt: { type: Date }, // ✅ optional: timestamp when payment completed
+    paidAt: { type: Date }, // optional: timestamp when payment completed
 
-    // 🏝️ Destination Info
+    // Destination Info
     destinationId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Destination",

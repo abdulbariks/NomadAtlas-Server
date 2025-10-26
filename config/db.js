@@ -14,7 +14,7 @@ const connectDB = async () => {
       useUnifiedTopology: true,
     });
 
-    isConnected = conn.connections[0].readyState === 1;
+    isConnected = mongoose.connection.readyState === 1;
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
     console.error("MongoDB connection error:", error.message);
