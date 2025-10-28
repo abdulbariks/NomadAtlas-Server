@@ -21,6 +21,8 @@ import resourceRoute from "./routes/resourceRoute.js"
 import errorHandler from "./middlewares/errorMiddleware.js";
 import jobRoutes from "./routes/jobRoutes.js"
 
+import favoriteRoutes from "./routes/favoritejobsRoutes.js";
+
 connectDB();
 
 // ✅ Initialize Express
@@ -58,6 +60,7 @@ app.use("/api/bookings", bookingRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/community", communityRoutes);
 app.use("/api/jobs",jobRoutes)
+app.use("/api/favoritesjobs", favoriteRoutes);
 
 
 // use cost-calculator
