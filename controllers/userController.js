@@ -82,7 +82,34 @@ export const getUserByEmail = async (req, res, next) => {
   }
 };
 
+// Update user profile by email
+export const updateUserProfile = async (req, res, next) => {
+  try {
+    const { email } = req.params;
+    const updateData = req.body;
 
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+    }
+
+    // Remove fields that shouldn't be updated
+    const { _id, createdAt, last_log_in, ...allowedUpdates } = updateData;
+
+    const user = await User.findOneAndUpdate(
+      { email },
+      { $set: allowedUpdates },
+      { new: true, runValidators: true }
+    );
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    next(error);
+  }
+};
 
 // role Check
 export const checkUserRole = async (req, res) => {
