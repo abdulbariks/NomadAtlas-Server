@@ -17,6 +17,8 @@ import internetSpeedRoutes from "./routes/internetSpeedRoutes.js";
 import commentRoutes from "./routes/blogComment.js";
 import jobRoutes from "./routes/jobRoutes.js"
 
+import favoriteRoutes from "./routes/favoritejobsRoutes.js";
+
 connectDB();
 
 
@@ -43,6 +45,7 @@ app.use("/api/reviews", reviewRoutes);
 app.use('/api/bookings', bookingRoutes)
 app.use("/api/payments", paymentRoutes);
 app.use("/api/jobs",jobRoutes)
+app.use("/api/favoritesjobs", favoriteRoutes);
 
 
 // use cost-calculator
