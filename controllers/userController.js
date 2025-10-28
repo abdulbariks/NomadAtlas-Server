@@ -1,4 +1,6 @@
 import User from "../models/userModel.js";
+
+// register user
 export const registerUser = async (req, res, next) => {
   try {
     const { name, email, photoURL, role } = req.body;
@@ -31,6 +33,7 @@ export const registerUser = async (req, res, next) => {
   }
 };
 
+// login user
 export const loginUser = async (req, res, next) => {
   try {
     const { email } = req.body;
@@ -48,7 +51,7 @@ export const loginUser = async (req, res, next) => {
   }
 }
 
-// ✅ Get all users
+//  Get all users
 export const getUsers = async (req, res, next) => {
   try {
     const users = await User.find();
@@ -57,6 +60,28 @@ export const getUsers = async (req, res, next) => {
     next(error);
   }
 };
+
+// Get user by email
+export const getUserByEmail = async (req, res, next) => {
+  try {
+    const { email } = req.params;
+
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+    }
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    next(error);
+  }
+};
+
 
 
 // role Check
