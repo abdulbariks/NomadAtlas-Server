@@ -36,7 +36,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "http://localhost:5174",
-      "https://nomad-atlast.netlify.app"
+      "https://nomandatlas.web.app"
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
