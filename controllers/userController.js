@@ -5,10 +5,6 @@ export const registerUser = async (req, res, next) => {
   try {
     const { name, email, photoURL, role } = req.body;
 
-    // const userExists = await User.findOne({ email });
-    // if (userExists)
-    //   return res.status(400).json({ message: "User already exists" });
-
     if (!email) {
       return res.status(400).json({ message: "Email is required" });
     }
@@ -16,8 +12,6 @@ export const registerUser = async (req, res, next) => {
     let user = await User.findOne({ email });
 
     if (user) {
-      // user.last_log_in = last_log_in || new Date()
-      // await user.save()
       return res.status(200).json(user);
     } else {
       const user = await User.create({
@@ -93,11 +87,41 @@ export const updateUserProfile = async (req, res, next) => {
     }
 
     // Remove fields that shouldn't be updated
-    const { _id, createdAt, last_log_in, ...allowedUpdates } = updateData;
+    const { _id, createdAt, last_log_in, role, ...allowedUpdates } = updateData; // Prevent role updates here
 
     const user = await User.findOneAndUpdate(
       { email },
       { $set: allowedUpdates },
+      { new: true, runValidators: true }
+    );
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    next(error);
+  }
+};
+
+// NEW: Update user role (admin only)
+export const updateUserRole = async (req, res, next) => {
+  try {
+    const { email } = req.params;
+    const { role } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+    }
+
+    if (!role || !['user', 'service provider', 'admin'].includes(role)) {
+      return res.status(400).json({ message: "Valid role is required: user, service provider, or admin" });
+    }
+
+    const user = await User.findOneAndUpdate(
+      { email },
+      { $set: { role } },
       { new: true, runValidators: true }
     );
 
@@ -131,5 +155,3 @@ export const checkUserRole = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 }
-
-
