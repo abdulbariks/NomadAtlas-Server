@@ -21,6 +21,8 @@ import favoriteRoutes from "./routes/favoritejobsRoutes.js";
 
 import perkRoutes from "./routes/perkRoutes.js";
 import successStoriesRoutes from "./routes/successStoriesRoutes.js";
+
+import statsRoutes from "./routes/statsRoutes.js";
 connectDB();
 
 
@@ -50,6 +52,7 @@ app.use("/api/jobs",jobRoutes)
 app.use("/api/favoritesjobs", favoriteRoutes);
 app.use("/api/perks", perkRoutes);
 app.use("/api/success-stories", successStoriesRoutes);
+app.use("/api/stats", statsRoutes);
 
 
 
