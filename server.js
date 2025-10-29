@@ -6,13 +6,13 @@ import connectDB from "./config/db.js";
 import { Server } from "socket.io";
 import CommunityMessage from "./models/communityModal.js"
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 const server = http.createServer(app);
 //setup socket io
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:5173", "https://nomad-atlast.netlify.app"],
+    origin: ["http://localhost:5173", "https://nomandatlas.web.app", "https://nomad-atlast.netlify.app/"],
     methods: ["GET", "POST"]
   }
 });
@@ -41,26 +41,16 @@ io.on("connection", (socket) => {
 });
 
 
-// Connect DB first, then start server
-// Connect to MongoDB and start server (only if not running in Vercel serverless mode)
-const startServer = async () => {
-  try {
-    await connectDB();
-
-    // Only listen if not running in a Vercel serverless environment
-    if (process.env.VERCEL !== "1") {
-      app.listen(PORT, () => {
-        console.log(`Server running locally on port ${PORT}`);
-      });
-    } else {
-      console.log("Running in Vercel serverless mode (no manual listen)");
-    }
-  } catch (error) {
-    console.error("MongoDB connection failed:", error.message);
-    // process.exit(1);
-  }
-};
-
-startServer();
+connectDB()
+  .then(() => {
+    server.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("Failed to connect to MongoDB:", err.message);
+    process.exit(1);
+  });
 
 export default app;
+ 
