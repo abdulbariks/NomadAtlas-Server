@@ -23,6 +23,8 @@ import perkRoutes from "./routes/perkRoutes.js";
 import successStoriesRoutes from "./routes/successStoriesRoutes.js";
 
 import statsRoutes from "./routes/statsRoutes.js";
+import newsletterRoutes from "./routes/newsletterRoutes.js";
+
 connectDB();
 
 
@@ -53,6 +55,8 @@ app.use("/api/favoritesjobs", favoriteRoutes);
 app.use("/api/perks", perkRoutes);
 app.use("/api/success-stories", successStoriesRoutes);
 app.use("/api/stats", statsRoutes);
+
+app.use("/api/newsletter", newsletterRoutes);
 
 
 
