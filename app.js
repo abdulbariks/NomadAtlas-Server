@@ -20,6 +20,7 @@ import jobRoutes from "./routes/jobRoutes.js"
 import favoriteRoutes from "./routes/favoritejobsRoutes.js";
 
 import perkRoutes from "./routes/perkRoutes.js";
+import successStoriesRoutes from "./routes/successStoriesRoutes.js";
 connectDB();
 
 
@@ -48,6 +49,8 @@ app.use("/api/payments", paymentRoutes);
 app.use("/api/jobs",jobRoutes)
 app.use("/api/favoritesjobs", favoriteRoutes);
 app.use("/api/perks", perkRoutes);
+app.use("/api/success-stories", successStoriesRoutes);
+
 
 
 // use cost-calculator
