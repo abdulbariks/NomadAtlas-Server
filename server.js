@@ -12,7 +12,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:5173", "https://nomandatlas.web.app", "https://nomad-atlast.netlify.app","https://nomad-atlas-visionaire.netlify.app"],
+    origin: ["http://localhost:5173", "https://nomandatlas.web.app", "https://nomad-atlast.netlify.app", "https://nomad-atlas-visionaire.netlify.app"],
     methods: ["GET", "POST"]
   }
 });
@@ -21,15 +21,26 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   console.log("New client connected:", socket.id);
 
+
+  socket.on("join_room", (room) => {
+    socket.join(room);
+    console.log(`Socket ${socket.id} joined room: ${room}`);
+  });
+
   socket.on("send_message", async (data) => {
     try {
       const savedMsg = await CommunityMessage.create({
         senderId: data.senderId,
         senderName: data.senderName,
         text: data.text,
+        room: data.room,
       });
 
-      io.emit("receive_message", savedMsg);
+      if (data.room) {
+        io.to(data.room).emit("receive_message", savedMsg); // room-only
+      } else {
+        io.emit("receive_message", savedMsg); // global
+      }
     } catch (error) {
       console.error("Error saving message:", error);
     }
@@ -53,4 +64,3 @@ connectDB()
   });
 
 export default app;
- 

@@ -1,9 +1,31 @@
+// try {
+//     const messages = await CommunityMessage.find().sort({ createdAt: 1 });
+//     res.json(messages);
+// } catch (err) {
+//     res.status(500).json({ message: err.message });
+// }
+// try {
+//     const { senderId, senderName, text } = req.body;
+
+//     if (!senderId || !text) {
+//         return res.status(400).json({ message: "Missing required fields" });
+//     }
+
+//     const newMessage = new CommunityMessage({ senderId, senderName, text });
+//     await newMessage.save();
+
+//     res.status(201).json(newMessage);
+// } catch (err) {
+//     res.status(500).json({ message: err.message });
+// }
 import CommunityMessage from "../models/communityModal.js";
 import CommunityPost from "../models/CommunityPost.js";
 
 export const getMessages = async (req, res) => {
     try {
-        const messages = await CommunityMessage.find().sort({ createdAt: 1 });
+        const { room } = req.query;
+        const filter = room ? { room } : {};
+        const messages = await CommunityMessage.find(filter).sort({ createdAt: 1 });
         res.json(messages);
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -12,13 +34,12 @@ export const getMessages = async (req, res) => {
 
 export const postMessage = async (req, res) => {
     try {
-        const { senderId, senderName, text } = req.body;
-
+        const { senderId, senderName, text, room } = req.body;
         if (!senderId || !text) {
             return res.status(400).json({ message: "Missing required fields" });
         }
 
-        const newMessage = new CommunityMessage({ senderId, senderName, text });
+        const newMessage = new CommunityMessage({ senderId, senderName, text, room });
         await newMessage.save();
 
         res.status(201).json(newMessage);
@@ -38,10 +59,10 @@ function humanizeNumber(n) {
 
 export const statsHandler = async (req, res) => {
     try {
-       
+
         const posts = await CommunityPost.find({}, { author: 1, category: 1, comments: 1, likes: 1 }).lean();
 
-        
+
         const totalPosts = Array.isArray(posts) ? posts.length : 0;
         let totalComments = 0;
         let totalLikes = 0;
@@ -59,7 +80,7 @@ export const statsHandler = async (req, res) => {
 
         const uniqueAuthors = authorsSet.size;
         const distinctCategories = categoriesSet.size;
-        
+
         const tiles = [
             { iconKey: "Users", label: "Active Nomads", value: humanizeNumber(uniqueAuthors) },
             { iconKey: "MapPin", label: "Destinations", value: "143" },
