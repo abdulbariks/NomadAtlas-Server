@@ -55,3 +55,18 @@ export const deleteJob = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+
+export const getSimilarJobs = async (req, res) => {
+  try {
+    const { category, id } = req.params;
+    const jobs = await Job.find({
+      category,
+      _id: { $ne: id },
+    }).limit(4);
+
+    res.json(jobs);
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
