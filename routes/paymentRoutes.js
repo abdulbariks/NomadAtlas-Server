@@ -3,6 +3,7 @@ import {
   createPaymentIntent,
   handleWebhook,
   getPaymentsByUser,
+  getAllPaymentHistory
 } from "../controllers/paymentController.js";
 
 const router = express.Router();
@@ -15,5 +16,8 @@ router.post("/webhook", express.json({ type: "*/*" }), handleWebhook);
 
 // ✅ Get payments by PaymentIntentId
 router.get("/:bookDestinationId", getPaymentsByUser);
+
+// ✅ Get all payment history
+router.get("/", getAllPaymentHistory);
 
 export default router;

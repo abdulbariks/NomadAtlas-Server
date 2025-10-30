@@ -12,7 +12,7 @@ const server = http.createServer(app);
 //setup socket io
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:5173", "https://nomandatlas.web.app", "https://nomad-atlast.netlify.app"],
+    origin: ["http://localhost:5173", "https://nomandatlas.web.app", "https://nomad-atlast.netlify.app","https://nomad-atlas-visionaire.netlify.app"],
     methods: ["GET", "POST"]
   }
 });
