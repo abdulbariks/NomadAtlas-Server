@@ -21,6 +21,14 @@ import errorHandler from "./middlewares/errorMiddleware.js";
 import jobRoutes from "./routes/jobRoutes.js"
 import favoriteRoutes from "./routes/favoritejobsRoutes.js";
 
+import perkRoutes from "./routes/perkRoutes.js";
+import successStoriesRoutes from "./routes/successStoriesRoutes.js";
+
+import statsRoutes from "./routes/statsRoutes.js";
+import newsletterRoutes from "./routes/newsletterRoutes.js";
+import contactRoutes from "./routes/contactRoutes.js";
+import faqRoutes from "./routes/faqRoutes.js";
+
 connectDB();
 
 const app = express();
@@ -31,6 +39,7 @@ app.use(
       "http://localhost:5173",
       "http://localhost:5174",
       "https://nomad-atlast.netlify.app",
+      "https://nomad-atlas-visionaire.netlify.app",
       "https://nomandatlas.web.app",
     ],
     credentials: true,
@@ -54,6 +63,14 @@ app.use("/api/payments", paymentRoutes);
 app.use("/api/community", communityRoutes);
 app.use("/api/jobs",jobRoutes)
 app.use("/api/favoritesjobs", favoriteRoutes);
+app.use("/api/perks", perkRoutes);
+app.use("/api/success-stories", successStoriesRoutes);
+app.use("/api/stats", statsRoutes);
+
+app.use("/api/newsletter", newsletterRoutes);
+app.use("/api/contact", contactRoutes);
+app.use("/api/faqs", faqRoutes);
+
 
 
 app.use("/api/cost-calculator", costCalculatorRoutes);

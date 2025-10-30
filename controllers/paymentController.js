@@ -92,3 +92,25 @@ export const getPaymentsByUser = async (req, res) => {
         res.status(500).json({ message: "Failed to fetch payments" });
     }
 };
+
+
+// ✅ 4. Get All Payment History
+export const getAllPaymentHistory = async (req, res) => {
+    try {
+        const payments = await Payment.find({})
+            .sort({ createdAt: -1 }) // latest first
+            .populate('bookDestinationId'); // optional: populate booking details if needed
+
+        res.status(200).json({
+            success: true,
+            count: payments.length,
+            data: payments
+        });
+    } catch (error) {
+        console.error("Failed to fetch payment history:", error.message);
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch payment history"
+        });
+    }
+};
