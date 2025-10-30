@@ -5,7 +5,6 @@ import express from "express";
 import cors from "cors";
 import connectDB from "./config/db.js";
 
-// Import Routes
 import userRoutes from "./routes/userRoutes.js";
 import popularDestinationRoutes from "./routes/popularDestinationRoutes.js";
 import destinationRoutes from "./routes/destinationRoutes.js";
@@ -24,14 +23,8 @@ import favoriteRoutes from "./routes/favoritejobsRoutes.js";
 
 connectDB();
 
-// ✅ Initialize Express
-
-connectDB();
-
-
 const app = express();
 
-// ✅ Middlewares
 app.use(
   cors({
     origin: [
@@ -45,9 +38,9 @@ app.use(
   })
 );
 
-app.use(express.json()); // Parse incoming JSON
+app.use(express.json());
 
-// ✅ Root endpoint
+
 app.get("/", (req, res) => {
   res.json({ status: "Server is running " });
 });
@@ -63,7 +56,6 @@ app.use("/api/jobs",jobRoutes)
 app.use("/api/favoritesjobs", favoriteRoutes);
 
 
-// use cost-calculator
 app.use("/api/cost-calculator", costCalculatorRoutes);
 app.use("/api/resources", resourceRoute);
 app.use("/api/blogs", blogsRoutes);
@@ -71,7 +63,6 @@ app.use("/api/comments", blogCommentRoutes);
 app.use("/api/internet-speed", internetSpeedRoutes);
 
 
-// Error Middleware
 app.use(errorHandler);
 
 export default app;
