@@ -21,7 +21,7 @@ router.patch('/email/:email/role', verifyFirebaseToken, verifyAdmin, updateUserR
 
 // Protected routes - any authenticated user
 router.get("/role/:email", verifyFirebaseToken, checkUserRole);
-router.get('/email/:email', verifyFirebaseToken, getUserByEmail);
+router.get('/email/:email', getUserByEmail);
 router.patch('/email/:email', verifyFirebaseToken, updateUserProfile); // Users can update own profile
 
 export default router;
