@@ -9,6 +9,7 @@ const commentSchema = new mongoose.Schema(
     },
     userName: {
       type: String,
+      trim: true,
       default: "Anonymous User",
     },
     userImage: {
@@ -17,11 +18,18 @@ const commentSchema = new mongoose.Schema(
     },
     text: {
       type: String,
-      required: true,
+      required: [true, "Comment text is required"],
+      trim: true,
+      maxlength: 1000,
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true, // Automatically adds createdAt & updatedAt
+    versionKey: false, // Removes __v field
+  }
 );
 
-const Comment = mongoose.model("Blog Comment", commentSchema);
+// Use a clear and conventional model name
+const Comment = mongoose.model("Comment", commentSchema);
+
 export default Comment;

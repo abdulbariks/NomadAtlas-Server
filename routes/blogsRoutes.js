@@ -8,7 +8,7 @@ import {
   likeBlog,
  
   
-} from "../controllers/blogs.js";
+} from "../controllers/blogsController.js";
 
 const router = express.Router();
 
