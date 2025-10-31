@@ -28,7 +28,8 @@ import statsRoutes from "./routes/statsRoutes.js";
 import newsletterRoutes from "./routes/newsletterRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
 import faqRoutes from "./routes/faqRoutes.js";
-
+ 
+import applicationRoutes from "./routes/applicationRoutes.js";
 connectDB();
 
 const app = express();
@@ -70,6 +71,8 @@ app.use("/api/stats", statsRoutes);
 app.use("/api/newsletter", newsletterRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/faqs", faqRoutes);
+app.use("/api/applications", applicationRoutes);
+app.use("/uploads", express.static("uploads"));
 
 
 
