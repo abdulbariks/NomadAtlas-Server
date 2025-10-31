@@ -6,7 +6,7 @@ dotenv.config();
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-// ✅ 1. Create Payment Intent
+// 1. Create Payment Intent
 export const createPaymentIntent = async (req, res) => {
     try {
         const { paidAmount, bookDestinationId } = req.body; // match frontend
@@ -39,7 +39,7 @@ export const createPaymentIntent = async (req, res) => {
     }
 };
 
-// ✅ 2. Stripe Webhook (update payment & booking after success)
+// 2. Stripe Webhook (update payment & booking after success)
 export const handleWebhook = async (req, res) => {
     const event = req.body;
 
@@ -82,7 +82,7 @@ export const handleWebhook = async (req, res) => {
     }
 };
 
-// ✅ 3. Get Payment Data (fetch by paymentIntentId)
+// 3. Get Payment Data (fetch by paymentIntentId)
 export const getPaymentsByUser = async (req, res) => {
     try {
         const { bookDestinationId } = req.params;
