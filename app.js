@@ -20,6 +20,7 @@ import resourceRoute from "./routes/resourceRoute.js"
 import errorHandler from "./middlewares/errorMiddleware.js";
 import jobRoutes from "./routes/jobRoutes.js"
 import favoriteRoutes from "./routes/favoritejobsRoutes.js";
+import cityRoutes from "./routes/cityRoutes.js"
 
 connectDB();
 
@@ -61,6 +62,7 @@ app.use("/api/resources", resourceRoute);
 app.use("/api/blogs", blogsRoutes);
 app.use("/api/comments", blogCommentRoutes);
 app.use("/api/internet-speed", internetSpeedRoutes);
+app.use('/api/cities', cityRoutes);
 
 
 app.use(errorHandler);
